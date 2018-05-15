@@ -1,10 +1,10 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "helloworld",
-  "short_name": "helloworld",
-  "version": "BasicAPP",
-  "description": "Hello World sample application that responds to the deviceready event.",
+  "name": "Question_Setting_App",
+  "short_name": "Question_Setting_App",
+  "version": "leaflet",
+  "description": "This application is designed to allow user to set question and locations.",
   "author": "PhoneGap Team",
   "icons": [],
   "start_url": "index.html"

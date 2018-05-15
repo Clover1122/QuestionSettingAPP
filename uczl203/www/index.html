@@ -15,13 +15,14 @@
   See the License for the specific language governing permissions and
   limitations under the License
 -->
+<!--the following code is adapted from Practical- Material Design & Other Concepts.pdf-->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Material Design Lite</title>
+    <title>Question-Setting App</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -61,20 +62,18 @@
     }
     </style>
 	
-	<!-- the following links add the CSS and Javascript required for the Leaflet Map -->
+	<!-- load the map //code is adapted from Practical-Leaflet&Javascript Part1.pdf-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="crossorigin=""></script>
     
-    <!-- the following CSS is used to set the size of the Map -->
+    <!-- set the size of the Map -->
     <style type="text/css">
     #mapid { height: 180px; }
     </style>
   </head>
-  
  
-  
-  <body>
-
+ <!-- the following code is also adapeted from Practical- Saving Data to the Server.pdf/Part3 -->
+ <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <header class="demo-header mdl-layout__header mdl-color--black mdl-color-text--white">
         <div class="mdl-layout__header-row">
@@ -87,69 +86,58 @@
           <div class="demo-avatar-dropdown">
             <span>UCL Question APP</span>
             <div class="mdl-layout-spacer"></div>
-
           </div>
         </header>
-        <nav class="demo-navigation mdl-navigation mdl-color--black">
-		  <label for="Question_ID">Question_ID</label><input type="text" size="25" id="Question_ID"/><br />
-          <label for="Question">Question</label><input type="text" size="25" id="Question"/><br />		  
-          <label for="Answer_1">Answer_1</label><input type="text" size="25" id="Answer_1"/><br />		  
-          <label for="Answer_2">Answer_2</label><input type="text" size="25" id="Answer_2"/><br />		  
-          <label for="Answer_3">Answer_3</label><input type="text" size="25" id="Answer_3"/><br />
-          <label for="Answer_4">Answer_4</label><input type="text" size="25" id="Answer_4"/><br />
-          <label for="Correct_Answer">Correct_Answer</label><input type="text" size="25" id="Correct_Answer"/><br />
-		  <label for="Location_Name">Location_Name</label><input type="text" size="25" id="Location_Name"/><br />
-		  <label for="Latitude">Latitude</label><input type="text" size="25" id="Latitude"/><br />
-          <label for="Longitude">Longitude</label><input type="text" size="25" id="Longitude"/><br />
+		
+		<!-- change the format of left side-menu -->
+		 <nav class="demo-navigation mdl-navigation mdl-color--black">
+		  <label for="question_id">question_id</label><input type="text" size="25" id="question_id"/><br />
+          <label for="question">question</label><input type="text" size="25" id="question"/><br />		  
+          <label for="answer_1">answer_1</label><input type="text" size="25" id="answer_1"/><br />		  
+          <label for="answer_2">answer_2</label><input type="text" size="25" id="answer_2"/><br />		  
+          <label for="answer_3">answer_3</label><input type="text" size="25" id="answer_3"/><br />
+          <label for="answer_4">answer_4</label><input type="text" size="25" id="answer_4"/><br />
+          <label for="correct_answer">correct_answer</label><input type="text" size="25" id="correct_answer"/><br />
+		  <label for="location_name">location_name</label><input type="text" size="25" id="location_name"/><br />
+		  <label for="latitude">latitude</label><input type="text" size="25" id="latitude"/><br />
+          <label for="longitude">longitude</label><input type="text" size="25" id="longitude"/><br />
+		  
+		  <!-- add a button to up load data -->
 		  <button id="startUpload" onclick="startDataUpload()">Start Data Upload</button>
-        </nav>
-      </div>
+          <!-- add a DIV to show the results of any uploaded process -->
+		  <br />
+		  <div id="dataUploadResult"> The result of the Upload Process goes here... </div>
+		 </nav>
+	   </div>
+
       <main class="mdl-layout__content mdl-color--white">
         <div class="mdl-grid demo-content">
           <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">	
 		  <div >
-          <h3>Question Setting data Uploaded</h3>
+          <h1>Welcome to the Question-Setting Application</h1>
           </div>  
-          <!-- the mapid div will hold the map -->
+          <!-- the following code is to change DIV content dynamically without reloading the entire page-->
+		  <!-- the code is adapted from Practical - Servers&AJAX.pdf-->
+		  <div >
+		  <h2>Click the map & Please follow the User Guide:)</h2>
+		  <div id="div1">This is the unchanged div content</div>
+		  <button id="button1" onclick="callDivChange()">Click me to change the DIV content </button>
+		  </div>
+		  <!-- the mapid div will hold the map -->
           <div id="mapid" style="width: 600px; height: 400px;"></div>		
           <div id="ajaxtest" style="width: 1600px; height: 20px;"></div>	
 		  <div >
-          <h7>User Guide:</h7>
+		  <!-- Add a User Guide to help users to understand this question-setting app -->
+		  <h7>User Guide:</h7>
 		  <div id='showLocation'>A. Click on the map to get the coordinates you want</div> 
 		  <div id='showLocation'>B. Use the side-menu to write question and enter the location details</div>
-		  <div id='showLocation'>C. Donnot forget to enter the correct answer and upload it</div>  		  
+		  <div id='showLocation'>C. Donnot forget to enter the correct answer and Click the Button 'Start Data Upload' below</div>  		  
           </div>		  
           </div>
         </div>
-		<script>
-		// load the map
-var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-// load the tiles
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-maxZoom: 18,
-attribution: 'Map data &copy; <ahref="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,' +
-'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-id: 'mapbox.streets'
-}).addTo(mymap);
-
-
-		// create a custom popup
-var popup = L.popup();
-// create an event detector to wait for the user's click event and then use the popup to show them where they clicked
-// note that you don't need to do any complicated maths to convert screen coordinates to real world coordiantes - the Leaflet API does this for you
-function onMapClick(e) {
-popup
-.setLatLng(e.latlng)
-.setContent("You clicked the map at " + e.latlng.toString())
-.openOn(mymap);
-}
-// now add the click event detector to the map
-mymap.on('click', onMapClick);
-</script>
       </main>
     </div>
-      
+
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 	<script src="./js/appActivity.js"></script>
 	<script src="./js/uploadData.js"> </script>
@@ -157,3 +145,4 @@ mymap.on('click', onMapClick);
   </body>
 </html>
 
+	   

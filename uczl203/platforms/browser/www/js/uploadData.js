@@ -1,47 +1,47 @@
+// uczl203--the following code is adapted from Practical - Saving Data to the Server.pdf
+// add an AJAX call and reponse method
 var client;
 
 function startDataUpload() {
-alert ("start data upload");
+alert ("Start Data Upload");
 
-// Question Status
-var Question_ID = document.getElementById("Question_ID").value;
-var Question = document.getElementById("Question").value;
-var Answer_1 = document.getElementById("Answer_1").value;
-var Answer_2 = document.getElementById("Answer_2").value;
-var Answer_3 = document.getElementById("Answer_3").value;
-var Answer_4 = document.getElementById("Answer_4").value;
-var Correct_Answer = document.getElementById("Correct_Answer").value;
-var Location_Name = document.getElementById("Location_Name").value;
+// the following code shows the question status
+var question_id = document.getElementById("question_id").value;
+var question = document.getElementById("question").value;
+var answer_1 = document.getElementById("answer_1").value;
+var answer_2 = document.getElementById("answer_2").value;
+var answer_3 = document.getElementById("answer_3").value;
+var answer_4 = document.getElementById("answer_4").value;
+var correct_answer = document.getElementById("correct_answer").value;
+var location_name = document.getElementById("location_name").value;
 
-// Now get the geometry values
-var Latitude = document.getElementById("Latitude").value;
-var Longitude = document.getElementById("Longitude").value;
-var postString = "Question_ID="+ Question_ID+ "Question="+ Question+ "&Answer_1="+ Answer_1+ "Answer_2="+ Answer_2+ "&Answer_3="+ Answer_3+ "&Answer_4="+ Answer_4+ "&Correct_Answer="+ Correct_Answer+ "&Location_Name="+ Location_Name; 
+alert(question_id + " " + question + " " + answer_1 + " " + answer_2 + " " + answer_3 + " " + answer_4 + " " + correct_answer + " " + location_name);
+//create a name/value pair string as parameters for the URL to send values to the server
+var postString = "question_id="+question_id +"&question="+question +"&answer_1="+answer_1 +"&answer_2="+answer_2 +"&answer_3="+answer_3 +"&answer_4="+answer_4 +"&correct_answer="+correct_answer +"&location_name="+location_name;
 
-// Adding up all the constraints
-postString = postString + "&Latitude=" + Latitude= + "&Longitude=" + Longitude;
+// now get the geometry values
+var latitude = document.getElementById("latitude").value;
+var longitude = document.getElementById("longitude").value;
 
-// Pop-up box for showing what data have been uploaded
-alert(Question_ID+ " "+ Question+ " "+ Answer_1 + " "+ Answer_2+ " "+Answer_3 + " "+ Answer_4+ " "+ Correct_Answer+ Latitude + " "+ Longitude + " "+ Location_Name);
+// then adding up all the constraints
+postString = postString + "&latitude=" + latitude + "&longitude=" + longitude;
 
 processData(postString);
-
 }
 
 function processData(postString) {
-client = new XMLHttpRequest();
-client.open('POST','http://developer.cege.ucl.ac.uk:30284/uploadData',true);
-client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-client.onreadystatechange = dataUploaded;
-client.send(postString);
-
+	client = new XMLHttpRequest();
+	client.open('POST','http://developer.cege.ucl.ac.uk:30284/uploadData',true);
+	client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	client.onreadystatechange = dataUploaded;
+	client.send(postString);
 }
-// create the code to wait for the response from the data server, and process the response once it is received
 
+// now, create the code to wait for the response from the data server, and process the response once it is received
 function dataUploaded() {
-// this function listens out for the server to say that the data is ready - i.e. has state 4
-if (client.readyState == 4) {
-// change the DIV to show the response
-document.getElementById("dataUploadResult").innerHTML = client.responseText;
-}
-}
+	// this function listens out for the server to say that the data is ready - i.e. has state 4
+	if (client.readyState == 4) {
+		// change the DIV to show the response
+		document.getElementById("dataUploadResult").innerHTML = client.responseText;
+		}
+	}
